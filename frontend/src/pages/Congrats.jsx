@@ -14,7 +14,7 @@ const Congrats = () => {
   });
 
   return (
-    <section className="congrats">
+    <section className="congrats" style={{ margin: "70px" }}>
       <div className="container congrats_container">
         <h2>Thanks for your vote</h2>
         <p>

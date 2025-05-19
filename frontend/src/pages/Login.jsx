@@ -3,19 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { voteActions } from "../store/vote-slice";
-// import { AppContext } from "../context/AppContext";
-//emailV
-// import { NavLink } from "react-router-dom";
+
 
 const Login = () => {
   const [userData, setUsreData] = useState({
     email: "",
     password: "",
   });
-  // const [isOtpSent, setIsOtpSent] = useState(false);
+  
   const [error, setError] = useState("");
 
-  // const backendUrl = process.env.REACT_APP_API_URL;
   const [isLoggedin, setIsLoggedin] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -34,18 +31,7 @@ const Login = () => {
     });
   };
 
-  //emailV
-  // const [showNav, setShowNav] = useState(
-  //   window.innerWidth < 600 ? false : true
-  // );
-  // const closeNavMenu = () => {
-  //   if (window.innerWidth < 600) {
-  //     setShowNav(false);
-  //   } else {
-  //     setShowNav(true);
-  //   }
-  // };
-  //emailV
+
   const loginVoter = async (e) => {
     e.preventDefault();
     //email

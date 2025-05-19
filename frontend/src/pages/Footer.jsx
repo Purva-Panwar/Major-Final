@@ -18,7 +18,7 @@ const Footer = () => {
             <ul>
               <li>
                 🗳️
-                <a href="/home"> Online Voting</a>
+                <a href="/"> Online Voting</a>
               </li>
               <li>
                 {" "}
@@ -117,9 +117,7 @@ const Footer = () => {
             />
             <br />
           </div>
-          {/* <div className="footer-bottom">
-            <p>@panwarpurva394@gmail.com</p>
-          </div> */}
+         
         </div>
       </footer>
     </div>

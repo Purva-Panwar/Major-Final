@@ -19,10 +19,10 @@ const initialState = {
 
 const voteSlice = createSlice({
     name: "vote",
-    
+
     initialState,
     reducers: {
-      
+
         changeSelectedVoteCandidate(state, action) {
             state.selectedVoteCandidate = action.payload;
         },

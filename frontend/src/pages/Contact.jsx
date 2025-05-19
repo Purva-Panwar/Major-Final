@@ -80,7 +80,7 @@ const Contact = () => {
             </div>
           </div>
 
-          {token && (
+          {/* {token && (
             <div className="verification-status">
               <h3>Account Status</h3>
               {isAccountVerified ? (
@@ -96,7 +96,7 @@ const Contact = () => {
                 </div>
               )}
             </div>
-          )}
+          )} */}
         </motion.div>
       </div>
 
@@ -106,7 +106,7 @@ const Contact = () => {
           margin: 0 auto;
           padding: 2rem 1rem;
           color: #333;
-          margin-top: 50px;
+          margin-top: 70px;
         }
 
         .contact-header {

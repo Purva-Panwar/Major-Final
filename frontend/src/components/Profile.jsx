@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import "./Pro.css";
-// import "../components/Profile.css";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
@@ -48,11 +47,23 @@ const Profile = () => {
       <div className="profile-details">
         <div className="div">
           <img
-            src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?ga=GA1.1.346386233.1742042256&semt=ais_hybrid"
+            // src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?ga=GA1.1.346386233.1742042256&semt=ais_hybrid"
+            src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?ga=GA1.1.145594747.1747650246&semt=ais_hybrid&w=740"
             alt="Profile"
             className="profile-img"
           />
         </div>
+
+        {/* {female && (
+          <div className="div">
+            <img
+              // src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?ga=GA1.1.346386233.1742042256&semt=ais_hybrid"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPnPkTLcuXp0GiFvrerIVIMH-vxCRFl1SlgQ&s"
+              alt="Profile"
+              className="profile-img"
+            />
+          </div>
+        )} */}
         <div className="details">
           <p>
             <strong>Name:</strong> {profile.fullName}
@@ -61,7 +72,7 @@ const Profile = () => {
             <strong>Email:</strong> {profile.email}
           </p>
           <p>
-            <strong>Voter ID:</strong> {profile.idnumber}
+            <strong>Aadhar Number:</strong> {profile.idnumber}
           </p>
           <p>
             <strong>Verified:</strong>{" "}

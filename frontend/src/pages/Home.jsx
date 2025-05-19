@@ -4,14 +4,7 @@ import "./Home.css";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faInstagram,
-  faGithub,
-  faLinkedin,
-  faTelegram,
-  faYoutube,
-} from "@fortawesome/free-brands-svg-icons";
+
 
 
 
@@ -127,9 +120,7 @@ const Home = () => {
                     Start Now
                   </NavLink>
                 )}
-                <NavLink to="/contact">
-                  <button className="contact-button">Contact</button>
-                </NavLink>
+               
               </>
             )}
             {/*  */}

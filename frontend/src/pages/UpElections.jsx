@@ -13,12 +13,7 @@ const UpElections = () => {
   const token = useSelector((state) => state?.vote?.currentVoter?.token);
   const navigate = useNavigate();
 
-  // Access control
-  // useEffect(() => {
-  //   if (!token) {
-  //     navigate("/");
-  //   }
-  // }, [token, navigate]);
+  
 
   const [elections, setElections] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -103,15 +98,7 @@ const UpElections = () => {
         <div className="container elections_container">
           <header className="elections_header">
             <div className="ver">
-              {/* {!isAccountVerified && (
-                <motion.h3
-                  initial={{ y: -20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  Please verify your Account for Vote Election
-                </motion.h3>
-              )} */}
+              
             </div>
 
             {isAdmin && (

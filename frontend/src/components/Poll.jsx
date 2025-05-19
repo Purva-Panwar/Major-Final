@@ -51,18 +51,7 @@ const Poll = () => {
             />
           ))}
         </ul>
-        {/* <div>
-          <h1 className="table1">Graph Result </h1>
-          <ul className="result_list lists">
-            {electionCandidates.map((candidate) => (
-              <CandidateRating2
-                key={candidate._id}
-                {...candidate}
-                totalVotes={totalVotes}
-              />
-            ))}
-          </ul>
-        </div> */}
+       
       </div>
       <style>
         {`

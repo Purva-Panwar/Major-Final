@@ -49,12 +49,9 @@ const Results = () => {
           {elections.map((election) => (
             <ResultElection key={election._id} {...election} />
           ))}
-          {/* {elections.map((election) => (
-          <Poll key={election._id} {...election} />
-        ))} */}
+         
         </div>
       </section>
-   
     </>
   );
 };

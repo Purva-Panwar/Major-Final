@@ -7,40 +7,38 @@ import { AiOutlineClose } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import "../store/vote-slice";
-import {
-  Home,
-  Info,
-  LogOut,
-  Phone,
-  Clipboard,
-  PieChart,
-  LogIn,
-  Layers,
-  Mail,
-} from "lucide-react";
-import Features from "../pages/Features";
+import { Home, Info, LogOut, Phone, LogIn, Layers, Mail } from "lucide-react";
+
 const Navbar = () => {
   const navigate = useNavigate();
-  const [showNav, setShowNav] = useState(
-    window.innerWidth < 600 ? false : true
-  );
-
+  const [showNav, setShowNav] = useState(window.innerWidth >= 700);
   const [isAccountVerified, setIsAccountVerified] = useState(false);
 
   const voterId = useSelector((state) => state?.vote?.currentVoter?.id);
   const token = useSelector((state) => state?.vote?.currentVoter?.token);
 
+  // Update showNav on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 700) {
+        setShowNav(false);
+      } else {
+        setShowNav(true);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const closeNavMenu = () => {
-    if (window.innerWidth < 600) {
+    if (window.innerWidth < 700) {
       setShowNav(false);
-    } else {
-      setShowNav(true);
     }
   };
 
   const sendVerificationOtp = async (voterId, token) => {
     if (!voterId) {
-      console.error("Voter email is missing.");
       alert("Your email is missing. Please log in again.");
       return;
     }
@@ -56,7 +54,6 @@ const Navbar = () => {
       );
 
       if (response.data.success) {
-        console.log(response.data.message);
         navigate("/email-verify");
       }
     } catch (error) {
@@ -69,12 +66,9 @@ const Navbar = () => {
 
   useEffect(() => {
     const fetchVerificationStatus = async () => {
-      try {
-        if (!token || !voterId) {
-          console.log("Token or Voter ID not found");
-          return;
-        }
+      if (!token || !voterId) return;
 
+      try {
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/voters/${voterId}`,
           {
@@ -90,31 +84,27 @@ const Navbar = () => {
     };
 
     fetchVerificationStatus();
-  }, [token, voterId]); // ✅ Include voterId in dependencies
+  }, [token, voterId]);
 
   return (
     <nav>
       <div className="container nav_container">
-        <div>
-          <Link to="/" className="nav_logo">
-            {/* <h1>E-VoteHub</h1> */}
-            <img
-              src="https://cdn-icons-png.flaticon.com/128/8487/8487642.png"
-              alt=""
-            />
-            e-Votehub
-          </Link>
-        </div>
+        <Link to="/" className="nav_logo">
+          <img
+            src="https://cdn-icons-png.flaticon.com/128/8487/8487642.png"
+            alt=""
+          />
+          e-Votehub
+        </Link>
 
         <div>
-          {/* {token && isAccountVerified && showNav && ( */}
           {showNav && (
             <menu>
-              <div className="link">
-                <NavLink to="/" onClick={closeNavMenu}>
-                  <Home /> <br /> <i class="fa-solid fa-house"></i>Home
-                </NavLink>
-              </div>
+              <NavLink to="/" onClick={closeNavMenu}>
+                <Home />
+                <br />
+                Home
+              </NavLink>
               <NavLink to="/about" onClick={closeNavMenu}>
                 <Info />
                 <br />
@@ -133,84 +123,46 @@ const Navbar = () => {
 
               {token ? (
                 <>
-                  {!isAccountVerified && token && (
-                    <>
-                      <NavLink
-                        to="/email-verify"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          sendVerificationOtp(voterId, token);
-
-                          // setShowNav(false);
-                        }}
-                      >
-                        <Mail />
-                        <br />
-                        Verify Email
-                      </NavLink>
-                    </>
+                  {!isAccountVerified && (
+                    <NavLink
+                      to="/email-verify"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        sendVerificationOtp(voterId, token);
+                      }}
+                    >
+                      <Mail />
+                      <br />
+                      Verify Email
+                    </NavLink>
                   )}
                   <NavLink to="/logout" onClick={closeNavMenu}>
                     <LogOut />
                     <br />
                     Logout
                   </NavLink>
-                  <div className="profile-contain ">
+                  <div className="profile-contain">
                     <NavLink
                       to="/profile"
                       onClick={closeNavMenu}
-                      className="profile-initial "
+                      className="profile-initial"
                     >
                       <img
-                        src="https://img.freepik.com/free-vector/user-circles-set_78370-4704.jpg?ga=GA1.1.346386233.1742042256&semt=ais_hybrid"
-                        alt=""
+                        src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?ga=GA1.1.145594747.1747650246&semt=ais_hybrid&w=740"
+                        alt="Profile"
                       />
                     </NavLink>
                   </div>
                 </>
               ) : (
-                <>
-                  {/* <NavLink to="/elections" onClick={closeNavMenu}>
-                    <Clipboard />
-                    <br />
-                    Election
-                  </NavLink>
-                  <NavLink to="/results" onClick={closeNavMenu}>
-                    <PieChart />
-                    <br />
-                    Result
-                  </NavLink> */}
-                  <NavLink to="/login" onClick={closeNavMenu}>
-                    <LogIn />
-                    <br />
-                    Login
-                  </NavLink>
-                  {/* <NavLink to="/register" onClick={closeNavMenu}>
-                    Register
-                  </NavLink> */}
-                </>
+                <NavLink to="/login" onClick={closeNavMenu}>
+                  <LogIn />
+                  <br />
+                  Login
+                </NavLink>
               )}
-
-              {/* ✅ Only show Verify Email button if voterEmail exists and is not verified */}
             </menu>
           )}
-
-          {/* <button
-            className="theme_toggle-btn"
-            onClick={
-              changeThemeHandler
-              //   () => {
-              //   const newTheme =
-              //     localStorage.getItem("voting-app-theme") === "dark"
-              //       ? ""
-              //       : "dark";
-              //   localStorage.setItem("voting-app-theme", newTheme);
-              //   setDarkTheme(newTheme);
-              // }
-            }
-          >
-            {darkTheme ? <IoMdSunny /> : <IoIosMoon />}
-          </button> */}
 
           <button
             className="nav_toggle-btn"
@@ -223,57 +175,57 @@ const Navbar = () => {
 
       <style>
         {`
-        .verify-btn-nav{
-        background-color:orange;
-        padding:7px 10px;
-         border-radius: 7px;
-        }
-        .profile-contain {
-          position: relative;
-          display: inline-block;
-          margin-left: 10px;
-          cursor: pointer;
-           background-color: rgb(14, 14, 90);
-       
-          border:none;
-         
-          border-radius: 50%;
-        }
+          .verify-btn-nav {
+            background-color: orange;
+            padding: 7px 10px;
+            border-radius: 7px;
+          }
 
-        .profile-initial {
-          width: 50px;
-          height: 50px;
-         
-          color: white;
-          font-size: 30px;
-          font-weight: bold;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 50%;
-        }
-        .profile-initial img{
-           border-radius: 50%;
-           }
-           @media (max-width: 768px){
-           .profile-contain{
-           width:20px;
-           height:20px;
-           margin:25px;
-           }
-           .profile-initial {
-           width:20px;
-           height:20px;
-           }
-               .profile-initial img{
-                width:50px;
-           height:50px;
-           
-               }
-           }
-               
-      
-      `}
+          .profile-contain {
+            position: relative;
+            display: inline-block;
+            margin-left: 10px;
+            cursor: pointer;
+            background-color: rgb(14, 14, 90);
+            border-radius: 50%;
+          }
+
+          .profile-initial {
+            width: 50px;
+            height: 50px;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+          }
+
+          .profile-initial img {
+            border-radius: 50%;
+          }
+
+          @media (max-width: 768px) {
+            .profile-contain {
+              width: 20px;
+              height: 20px;
+              margin: 25px;
+            }
+
+            .profile-initial {
+              width: 20px;
+              height: 20px;
+            }
+
+            .profile-initial img {
+              width: 50px;
+              height: 50px;
+            }
+            .container{
+            padding-left:40px;}
+          }
+        `}
       </style>
     </nav>
   );

@@ -26,12 +26,9 @@ const ElectionDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  // const navigate = useNavigate();
-  // const token = useSelector((state) => state?.vote?.currentVoter?.token);
-  const isAdmin = useSelector((state) => state?.vote?.currentVoter?.isAdmin);
+    const isAdmin = useSelector((state) => state?.vote?.currentVoter?.isAdmin);
 
-  // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YjZkYTMxNWI4MzM5YWM0MjgxOGMzZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTc0MDgxODk3NywiZXhwIjoxNzQwOTA1Mzc3fQ.KD2GlcUHfP8BtJIhFkqcOwShuaQeQOi_gHZ5fFaRsNU";
-  //
+ 
 
   const addCandidateModalShowing = useSelector(
     (state) => state.ui.addCandidateModalShowing
@@ -97,8 +94,7 @@ const ElectionDetails = () => {
       console.log(error);
     }
   };
-  // const startDate = election.startDate;
-  // startDate.split("T")[0];
+ 
   useEffect(() => {
     getElection();
     getCandidates();
@@ -213,11 +209,7 @@ const ElectionDetails = () => {
               </>
             )}
           </div>
-          {/* {isAdmin && (
-            <button className="btn danger full" onClick={deleteElection}>
-              Delete Election
-            </button>
-          )} */}
+       
         </div>
       </section>
 

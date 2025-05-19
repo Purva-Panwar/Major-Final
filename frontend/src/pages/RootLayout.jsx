@@ -8,26 +8,35 @@ import axios from "axios";
 
 const RootLayout = () => {
   const voterId = useSelector((state) => state?.vote?.currentVoter?.id);
-  // const token = useSelector((state) => state?.vote?.currentVoter?.token);
+  const token = useSelector((state) => state?.vote?.currentVoter?.token);
+
   const [selectedTab, setSelectedTab] = useState("Home");
   const [isVoterRegistered, setIsVoterRegistered] = useState(false);
-  const token = useSelector((state) => state?.vote?.currentVoter?.token);
+  const [isAccountVerified, setIsAccountVerified] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const isMobile = windowWidth <= 700;
+
+  // Handle window resize
   useEffect(() => {
-    // Check voter registration status from localStorage (or your logic)
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Check voter registration
+  useEffect(() => {
     const registered = localStorage.getItem("voterRegistered");
     if (registered === "true") {
       setIsVoterRegistered(true);
     }
   }, []);
 
-  const [isAccountVerified, setIsAccountVerified] = useState(false);
+  // Fetch account verification status
   useEffect(() => {
     const fetchVerificationStatus = async () => {
       try {
-        if (!token || !voterId) {
-          console.log("Token or Voter ID not found");
-          return;
-        }
+        if (!token || !voterId) return;
 
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/voters/${voterId}`,
@@ -48,14 +57,25 @@ const RootLayout = () => {
 
   return (
     <>
-      {/* Top Navigation */}
+      {/* Navbar */}
       <Navbar />
 
-      {/* Main Content */}
-      <div style={{ display: "flex", minHeight: "calc(100vh - 160px)" }}>
-        {/* Conditionally show Sidebar if voter is registered */}
+      {/* Main Content Layout */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          minHeight: "calc(100vh - 160px)",
+        }}
+      >
+        {/* Sidebar on left (desktop) or top (mobile) */}
         {token && (
-          <aside style={{ width: "20%", margin: "0 20px" }}>
+          <aside
+            style={{
+              width: isMobile ? "100%" : "20%",
+              // margin: isMobile ? "0 0 0px 0" : "0 0px 0 0px",
+            }}
+          >
             <Sidebar
               selectedTab={selectedTab}
               setSelectedTab={setSelectedTab}
@@ -63,14 +83,12 @@ const RootLayout = () => {
           </aside>
         )}
 
-        {/* Page Content Area */}
+        {/* Outlet Content */}
         <main
           style={{
             flex: 1,
-            
-            // marginTop: "5px",
-
-            // width: isVoterRegistered && "100%", // Expand if no sidebar
+            padding: "10px",
+            width: isMobile ? "100%" : "auto",
           }}
         >
           <Outlet />
@@ -82,62 +100,3 @@ const RootLayout = () => {
 };
 
 export default RootLayout;
-
-// import React, { useState } from "react";
-// import { Outlet } from "react-router-dom";
-// import Navbar from "../components/Navbar";
-// import Sidebar from "./Sidebar";
-// import Footer from "./Footer";
-
-// const RootLayout = () => {
-//   const [selectedTab, setSelectedTab] = useState("Home");
-
-//   return (
-//     <>
-//       {/* Top Navigation */}
-//       <Navbar />
-
-//       {/* Main content area: sidebar + outlet */}
-//       <div style={{ display: "flex", minHeight: "calc(100vh - 160px)" }}>
-//         {/* Sidebar on the left */}
-//         <main style={{ width: "20%", margin: "0 20px" }}>
-//           <Sidebar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
-//         </main>
-
-//         {/* Outlet (page content) on the right */}
-//         <main
-//           style={{ flex: 1, padding: "1rem", width: "75%", marginTop: "70px" }}
-//         >
-//           <Outlet />
-//           <Footer />
-//         </main>
-//       </div>
-
-//       {/* Bottom Footer */}
-//     </>
-//   );
-// };
-
-// export default RootLayout;
-
-// // import React, { useState } from "react";
-// // import { Outlet } from "react-router-dom";
-// // import Navbar from "../components/Navbar";
-// // // import Sidebar from "./Sidebar";
-// // import Footer from "./Footer";
-// // import Sidebar from "./Sidebar";
-
-// // const RootLayout = () => {
-// //   const [setectedTab, setSelectedTab] = useState("Home");
-// //   return (
-// //     <>
-
-// //       <Navbar />
-// //       <Sidebar selectedTab={setectedTab} setSelectedTab={setSelectedTab} />
-// //       <Outlet />
-// //       <Footer />
-// //     </>
-// //   );
-// // };
-
-// // export default RootLayout;

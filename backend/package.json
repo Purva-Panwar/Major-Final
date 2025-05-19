@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "vote-backend",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -25,5 +25,14 @@
     "uid": "^2.0.2",
     "uuid": "^11.1.0"
   },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Purva-Panwar/online-voting-Backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Purva-Panwar/online-voting-Backend/issues"
+  },
+  "homepage": "https://github.com/Purva-Panwar/online-voting-Backend#readme",
   "description": ""
 }

@@ -1,5 +1,6 @@
 
 .terms-container {
+  width: 80%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -13,6 +14,7 @@
     /* margin-top: 100px; */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     flex-wrap: wrap;
+   
   }
   
   /* Image section */
@@ -30,8 +32,10 @@
   /* Content section */
   .terms-content {
     flex: 1;
-    padding: 20px;
-    margin-top: 50px;
+    padding: 40px ;
+     /* margin: 0 40px; */
+    margin-top: 90px;
+ 
   }
   
   .terms-content h2 {

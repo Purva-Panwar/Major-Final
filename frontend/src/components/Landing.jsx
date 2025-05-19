@@ -1,5 +1,5 @@
 import React from "react";
-// import '../styles/LandingPage.css';
+
 import { motion } from "framer-motion"; // animation library
 
 const Landing = () => {
