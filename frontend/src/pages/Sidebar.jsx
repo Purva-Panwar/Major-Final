@@ -49,9 +49,10 @@ function Sidebar({ selectedTab, setSelectedTab }) {
 
         <ul className="sidebar-menu">
           <div className="sidebar-user">
-            <NavLink  className="profile-initial">
+            <NavLink className="profile-initial">
               <img
-                src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?ga=GA1.1.145594747.1747650246&semt=ais_hybrid&w=740"     alt="User"
+                src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?ga=GA1.1.145594747.1747650246&semt=ais_hybrid&w=740"
+                alt="User"
               />
             </NavLink>
           </div>
@@ -114,8 +115,6 @@ function Sidebar({ selectedTab, setSelectedTab }) {
               See my Profile
             </Link>
           </li>
-
-       
         </ul>
 
         {/* Social Links */}
@@ -180,7 +179,7 @@ function Sidebar({ selectedTab, setSelectedTab }) {
       position: fixed;
       top: 20px;
       left: 20px;
-      z-index: 2000;
+      z-index: 1000;
       background: #ffffff;
       border-radius: 50%;
       padding: 10px;
